@@ -1,25 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the DetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DetailsModel } from '../../app/models/monitor-details.model';
 
 @IonicPage()
 @Component({
   selector: 'page-details',
   templateUrl: 'details.html',
 })
-export class DetailsPage {
+export class DetailsPage implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public monitorFromServer: DetailsModel;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) { }
+
+  ngOnInit(): void {
+    this.bootsTrap();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailsPage');
+  }
+ 
+  /**
+   * Initializes screen with needed data.
+   */
+  private bootsTrap(): void {
+    // TODO get this data with service.
+    this.monitorFromServer = {
+      name: 'Teste01',
+      maxPower: 300,
+      powerAvarage: 150,
+      value: 200
+    } as DetailsModel
   }
 
 }

@@ -1,43 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ActionSheetController } from 'ionic-angular';
+import { MonitorListItem } from '../../app/models/monitor-list-item.model';
+import { DetailsPage } from '../details/details';
 
 @Component({
   selector: 'page-meter-list',
   templateUrl: 'meter-list.html'
 })
-export class MeterListPage {
+export class MeterListPage implements OnInit {
+
+  items: Array<MonitorListItem>;
 
   constructor(
-    public navCtrl: NavController,
-    public actionSheetCtrl: ActionSheetController
+    public navCtrl: NavController
   ) { }
 
-  openMenu() {
-    const actionSheet = this.actionSheetCtrl.create({
-      title: 'Modify your album',
-      buttons: [
-        {
-          text: 'Destructive',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-          }
-        },{
-          text: 'Archive',
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+  ngOnInit() {
+    // TODO: retriver this items from server.s
+    this.items = [];
+    this.items.push(this.buildMonitorItem());
+  }
+
+  public itemSelected(item: MonitorListItem): void {
+    this.navCtrl.push(DetailsPage);
+  }
+
+  // for test porouses
+  private buildMonitorItem(): MonitorListItem {
+    return {
+      name: 'Teste01'
+    } as MonitorListItem;
   }
 
 }
