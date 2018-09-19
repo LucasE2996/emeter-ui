@@ -11,18 +11,16 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DetailsPage } from '../pages/details/details';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
     AddMeterPage,
     MeterListPage,
-<<<<<<< HEAD
-    TabsPage
-=======
     TabsPage,
-    DetailsPage
->>>>>>> :file name fix
+    DetailsPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -34,12 +32,9 @@ import { DetailsPage } from '../pages/details/details';
     MyApp,
     AddMeterPage,
     MeterListPage,
-<<<<<<< HEAD
-    TabsPage
-=======
     TabsPage,
-    DetailsPage
->>>>>>> :file name fix
+    DetailsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
