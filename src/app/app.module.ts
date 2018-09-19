@@ -17,12 +17,8 @@ import { DetailsPage } from '../pages/details/details';
     MyApp,
     AddMeterPage,
     MeterListPage,
-<<<<<<< HEAD
-    TabsPage
-=======
     TabsPage,
     DetailsPage
->>>>>>> :file name fix
   ],
   imports: [
     BrowserModule,
@@ -34,12 +30,8 @@ import { DetailsPage } from '../pages/details/details';
     MyApp,
     AddMeterPage,
     MeterListPage,
-<<<<<<< HEAD
-    TabsPage
-=======
     TabsPage,
     DetailsPage
->>>>>>> :file name fix
   ],
   providers: [
     StatusBar,
