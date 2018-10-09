@@ -18,17 +18,25 @@ export class MeterListPage implements OnInit {
   ngOnInit() {
     // TODO: retriver this items from server.s
     this.items = [];
-    this.items.push(this.buildMonitorItem());
+    this.items.push(this.buildMonitorItem('Teste 01'));
+    this.items.push(this.buildMonitorItem('Teste 02'));
+    this.items.push(this.buildMonitorItem('Teste 03'));
+    this.items.push(this.buildMonitorItem('Teste 04'));
   }
 
+  /**
+   * Perform the screen navigation to the item details page.
+   * 
+   * @param item the item selected items list.
+   */
   public itemSelected(item: MonitorListItem): void {
     this.navCtrl.push(DetailsPage);
   }
 
   // for test porouses
-  private buildMonitorItem(): MonitorListItem {
+  private buildMonitorItem(name: string): MonitorListItem {
     return {
-      name: 'Teste01'
+      name
     } as MonitorListItem;
   }
 

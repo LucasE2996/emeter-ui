@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DetailsPage } from '../pages/details/details';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DetailsPage } from '../pages/details/details';
     AddMeterPage,
     MeterListPage,
     TabsPage,
-    DetailsPage
+    DetailsPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { DetailsPage } from '../pages/details/details';
     AddMeterPage,
     MeterListPage,
     TabsPage,
-    DetailsPage
+    DetailsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
