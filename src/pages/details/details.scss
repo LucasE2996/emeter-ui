@@ -1,3 +1,14 @@
 page-details {
-
+    
+    ion-content {
+        background-color: #2c2f33;
+        text-align: center;
+        mwl-gauge {
+            margin-top: 10vh;
+            width: 100%;
+        }
+        .text-info {
+            margin-top: 22vh;
+        }
+    }
 }

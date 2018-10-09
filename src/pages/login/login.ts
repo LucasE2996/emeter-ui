@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MeterListPage } from '../meter-list/meter-list';
 import { TabsPage } from '../tabs/tabs';
 
 @Component({

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GaugeModule } from 'angular-gauge';
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 import { AddMeterPage } from '../pages/add-meter/add-meter';
 import { MeterListPage } from '../pages/meter-list/meter-list';
@@ -39,7 +40,8 @@ import { LoginPage } from '../pages/login/login';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    QRScanner
   ]
 })
 export class AppModule {}

@@ -7,7 +7,7 @@ import { DetailsModel } from '../../app/models/monitor-details.model';
   selector: 'page-details',
   templateUrl: 'details.html',
 })
-export class DetailsPage implements OnInit{
+export class DetailsPage implements OnInit {
 
   public monitorFromServer: DetailsModel;
 
@@ -34,6 +34,15 @@ export class DetailsPage implements OnInit{
       powerAvarage: 150,
       value: 200
     } as DetailsModel
+
   }
 
+  // Test purposes
+  public animate(): void {
+    if (this.monitorFromServer.value === 250) {
+      this.monitorFromServer.value = 100;
+    } else {
+      this.monitorFromServer.value = 250;
+    }
+  }
 }

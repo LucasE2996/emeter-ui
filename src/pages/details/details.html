@@ -12,13 +12,19 @@
 
   <mwl-gauge
     [max]="monitorFromServer.maxPower"
-    [dialStartAngle]="-90"
-    [dialEndAngle]="-90.001"
+    [dialStartAngle]="0"
+    [dialEndAngle]="180"
     [value]="monitorFromServer.value"
     [animated]="true"
     [animationDuration]="1">
   </mwl-gauge>
 
-  <h5>Maximum Power: {{ monitorFromServer.maxPower }}</h5>
-  <h5>Power Avarage: {{ monitorFromServer.powerAvarage }}</h5>
+  <div class="text-info">
+    <h5>Maximum Power: {{ monitorFromServer.maxPower }}</h5>
+    <h5>Power Avarage: {{ monitorFromServer.powerAvarage }}</h5>
+  </div>
+
+  <!-- teste purposes -->
+  <button ion-button (click)="animate()">Default</button>
+  
 </ion-content>
