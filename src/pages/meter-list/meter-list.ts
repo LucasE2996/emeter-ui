@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MonitorListItem } from '../../app/models/monitor-list-item.model';
 import { DetailsPage } from '../details/details';
+import { LoadingController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-meter-list',
@@ -9,13 +11,20 @@ import { DetailsPage } from '../details/details';
 })
 export class MeterListPage implements OnInit {
 
-  items: Array<MonitorListItem>;
+  public items: Array<MonitorListItem>;
+
+  private loader = this.loadingCtrl.create({
+    content: "Please wait...",
+    duration: 3000
+  });
 
   constructor(
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
+    this.loader.present();
     // TODO: retriver this items from server.s
     this.items = [];
     this.items.push(this.buildMonitorItem('Teste 01'));

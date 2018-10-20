@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DetailsModel } from '../../app/models/monitor-details.model';
+import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,7 @@ import { DetailsModel } from '../../app/models/monitor-details.model';
 })
 export class DetailsPage implements OnInit {
 
-  public monitorFromServer: DetailsModel;
+  public monitorFromServer: MonitorDetailsModel;
 
   constructor(
     public navCtrl: NavController,
@@ -33,7 +33,7 @@ export class DetailsPage implements OnInit {
       maxPower: 300,
       powerAvarage: 150,
       value: 200
-    } as DetailsModel
+    } as MonitorDetailsModel
 
   }
 

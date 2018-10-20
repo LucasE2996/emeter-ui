@@ -8,7 +8,8 @@
  * 
  * @interface DetailsModel
  */
-export interface DetailsModel {
+export interface MonitorDetailsModel {
+    id: string;
     name: string;
     maxPower: number;
     powerAvarage: number;

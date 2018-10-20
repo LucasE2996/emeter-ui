@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { DetailsModel } from "../models/monitor-details.model";
+import { MonitorDetailsModel } from "../models/monitor-details.model";
 import { MonitorListItem } from "../models/monitor-list-item.model";
 import { Observable } from "rxjs/Observable";
 
@@ -14,8 +14,8 @@ export class UserService {
      * 
      * @param id the user unique identifier.
      */
-    public getUserById(id: string): Observable<DetailsModel> {
-        return this.http.get<DetailsModel>(`localhost:8080/user/${id}`);
+    public getUserById(id: string): Observable<MonitorDetailsModel> {
+        return this.http.get<MonitorDetailsModel>(`localhost:8080/user/${id}`);
     }
 
     /**
