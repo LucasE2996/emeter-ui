@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { MonitorDetailsModel } from "../models/monitor-details.model";
-import { MonitorListItem } from "../models/monitor-list-item.model";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()

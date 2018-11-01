@@ -9,6 +9,7 @@ import { MonitorListItem } from "./monitor-list-item.model";
  * @param monitors All the monitor the user owns
  */
 export interface UserModel {
+    userID: number;
     name: string;
     email: string;
     password: string;

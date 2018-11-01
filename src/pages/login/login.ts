@@ -1,8 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-import { AuthenticationService } from '../../app/services/login.service';
 import { AlertController } from 'ionic-angular';
+import { UserModel } from '../../app/models/user.model';
+import { Storage } from '@ionic/storage';
+import { AuthenticationService } from '../../app/authentication/authentication.service';
 
 @Component({
   selector: 'page-login',
@@ -16,8 +18,9 @@ export class LoginPage implements OnDestroy {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private readonly loginService: AuthenticationService,
-    private readonly alertCtrl: AlertController
+    private readonly authService: AuthenticationService,
+    private readonly alertCtrl: AlertController,
+    private storage: Storage
   ) { }
 
   ionViewDidLoad() {
@@ -25,8 +28,17 @@ export class LoginPage implements OnDestroy {
   }
 
   public login(): void {
-    this.loginService.login(this.username, this.password).subscribe(() => 
-      this.navCtrl.push(TabsPage),
+    this.authService.login(this.username, this.password).subscribe((user: UserModel) =>
+    {
+        // login successful if there's a user in the response
+        if (user) {
+            // store user details and basic auth credentials in local storage 
+            // to keep user logged in between page refreshes
+            this.storage.set('currentUser', JSON.stringify(user));
+        this.navCtrl.push(TabsPage);
+
+        }
+    },
       (error: any) => {
         const alert = this.alertCtrl.create({
           title: 'Login Failed!',
