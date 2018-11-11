@@ -3,6 +3,9 @@ import { NavController } from 'ionic-angular';
 import { MonitorListItem } from '../../app/models/monitor-list-item.model';
 import { DetailsPage } from '../details/details';
 import { LoadingController } from 'ionic-angular';
+import { MonitorService } from '../../app/services/monitor.service';
+import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
+import { UserModel } from '../../app/models/user.model';
 
 
 @Component({
@@ -20,17 +23,20 @@ export class MeterListPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public readonly monitorService: MonitorService
   ) { }
 
   ngOnInit() {
     this.loader.present();
-    // TODO: retriver this items from server.s
-    this.items = [];
-    this.items.push(this.buildMonitorItem('Teste 01'));
-    this.items.push(this.buildMonitorItem('Teste 02'));
-    this.items.push(this.buildMonitorItem('Teste 03'));
-    this.items.push(this.buildMonitorItem('Teste 04'));
+    localStorage.removeItem('monitorID');
+    const customer: UserModel = JSON.parse(localStorage.getItem('currentUser'));
+    this.monitorService.getAllMonitors(customer.id)
+      .subscribe((monitors: Array<MonitorDetailsModel>) => {
+        monitors ?
+        this.items = this.monitorService.mapMonitorDetailtoList(monitors) :
+        this.items = []
+      });
   }
 
   /**
@@ -39,14 +45,7 @@ export class MeterListPage implements OnInit {
    * @param item the item selected items list.
    */
   public itemSelected(item: MonitorListItem): void {
+    localStorage.setItem('monitorID', item.id)
     this.navCtrl.push(DetailsPage);
   }
-
-  // for test porouses
-  private buildMonitorItem(name: string): MonitorListItem {
-    return {
-      name
-    } as MonitorListItem;
-  }
-
 }

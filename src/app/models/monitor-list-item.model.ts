@@ -4,5 +4,6 @@
  * @param name The monitor name
  */
 export interface MonitorListItem {
-    name: string; 
+    name: string;
+    id: string;
 }

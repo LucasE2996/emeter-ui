@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { MonitorDetailsModel } from "../models/monitor-details.model";
 import { Observable } from "rxjs/Observable";
+import { UserModel } from "../models/user.model";
 
 @Injectable()
 
 export class UserService {
+
+    private readonly MOCKED_URL = '/api/user/detail';
+
     constructor(private readonly http: HttpClient) {}
 
     /**
@@ -13,8 +16,9 @@ export class UserService {
      * 
      * @param id the user unique identifier.
      */
-    public getUserById(id: string): Observable<MonitorDetailsModel> {
-        return this.http.get<MonitorDetailsModel>(`localhost:8080/user/${id}`);
+    public getUserById(id: string): Observable<UserModel> {
+        // return this.http.get<UserModel>(`localhost:8080/user/${id}`);
+        return this.http.get<UserModel>(this.MOCKED_URL);
     }
 
     /**

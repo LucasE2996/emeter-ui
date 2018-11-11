@@ -15,14 +15,22 @@ export class MonitorService {
      * @param id the monitor unique identifier.
      */
     public getMonitorDetail(userId: string, id: string): Observable<MonitorDetailsModel> {
-        return this.http.get<MonitorDetailsModel>(`localhost:8080/user/${userId}/meter/${id}/detail`);
+        return this.http.get<MonitorDetailsModel>(`/api/user/${userId}/meter/${id}/detail`);
     }
 
     /**
      * Return all monitors for List page.
      */
-    public getAllMonitors(userId: string): Observable<Array<MonitorListItem>> {
-        return null;
+    public getAllMonitors(userId: string): Observable<Array<MonitorDetailsModel>> {
+        return this.http.get<Array<MonitorDetailsModel>>(`/api/user/${userId}/meters`);
     }
 
+    public mapMonitorDetailtoList(monitors: Array<MonitorDetailsModel>): Array<MonitorListItem> {
+        return monitors.map<MonitorListItem>((monitor: MonitorDetailsModel) => {
+            return {
+                name: monitor.name,
+                id: monitor.id.toString()
+            } as MonitorListItem
+        });
+    }
 }

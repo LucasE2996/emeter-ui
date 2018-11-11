@@ -9,9 +9,23 @@
  * @interface DetailsModel
  */
 export interface MonitorDetailsModel {
-    id: string;
+    id: number;
+    client_id: number;
+    channel_id: number;
     name: string;
-    maxPower: number;
-    powerAvarage: number;
+    watt: Watt;
+    report: Report;
+}
+
+export interface Watt {
     value: number;
+    maxValue: number;
+    minValue: number;
+    date: string;
+}
+
+export interface Report {
+    dayAverage: number;
+    weekAverage: number;
+    monthAverage: number;
 }

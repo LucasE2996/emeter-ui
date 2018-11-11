@@ -7,7 +7,7 @@ import { UserModel } from '../models/user.model';
 export class AuthenticationService
 {
 
-    private readonly loginRestEndpint = 'http://localhost:8080/user/detail';
+    private readonly loginRestEndpint = '/api/user/detail';
 
     constructor(
         private http: HttpClient

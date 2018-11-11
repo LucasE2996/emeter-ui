@@ -1,5 +1,3 @@
-import { MonitorListItem } from "./monitor-list-item.model";
-
 /**
  *  The customer model
  * 
@@ -9,9 +7,7 @@ import { MonitorListItem } from "./monitor-list-item.model";
  * @param monitors All the monitor the user owns
  */
 export interface UserModel {
-    userID: number;
+    id: string;
     name: string;
     email: string;
-    password: string;
-    monitors: Array<MonitorListItem>;
 }

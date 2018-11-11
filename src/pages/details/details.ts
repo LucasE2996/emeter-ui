@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
+import { MonitorService } from '../../app/services/monitor.service';
+import { UserModel } from '../../app/models/user.model';
 
 @IonicPage()
 @Component({
@@ -10,39 +12,43 @@ import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 export class DetailsPage implements OnInit {
 
   public monitorFromServer: MonitorDetailsModel;
+  private user: UserModel;
+  private monitorId: string;
+
+  private loader = this.loadingCtrl.create({
+    content: "Please wait...",
+    duration: 2000
+  });
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public readonly monitorService: MonitorService
   ) { }
 
   ngOnInit(): void {
-    this.bootsTrap();
+    this.loader.present();
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.monitorId = localStorage.getItem('monitorID');
+    this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
+      .subscribe((monitor: MonitorDetailsModel) =>
+        monitor ?
+        this.monitorFromServer = monitor :
+        this.monitorFromServer = {} as MonitorDetailsModel
+      );
   }
 
   ionViewDidLoad() {
   }
- 
-  /**
-   * Initializes screen with needed data.
-   */
-  private bootsTrap(): void {
-    // TODO get this data with service.
-    this.monitorFromServer = {
-      name: 'Teste01',
-      maxPower: 300,
-      powerAvarage: 150,
-      value: 200
-    } as MonitorDetailsModel
-
-  }
 
   // Test purposes
-  public animate(): void {
-    if (this.monitorFromServer.value === 250) {
-      this.monitorFromServer.value = 100;
-    } else {
-      this.monitorFromServer.value = 250;
-    }
+  public update(): void {
+    this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
+      .subscribe((monitor: MonitorDetailsModel) =>
+        monitor ?
+        this.monitorFromServer = monitor :
+        this.monitorFromServer = {} as MonitorDetailsModel
+      );
   }
 }
