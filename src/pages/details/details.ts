@@ -39,13 +39,21 @@ export class DetailsPage implements OnInit {
   // Test purposes
   public update(): void {
     this.loaginService.showLoader();
+    const maxValue = this.monitorFromServer.watt.maxValue;
     this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
       .subscribe((monitor: MonitorDetailsModel) =>
         monitor ?
         this.monitorFromServer = monitor :
         this.monitorFromServer = {} as MonitorDetailsModel
-      ).add(() => this.roundNumbers())
-      .add(() => this.loaginService.dismissLoading());
+      ).add(() => {
+        this.roundNumbers();
+        // mwl-gauge component do not update [max] property on demant
+        // so I have to update the screen manually (UGGLY I KNOW)
+        if (maxValue < this.monitorFromServer.watt.maxValue) {
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        }
+        this.loaginService.dismissLoading();
+      });
   }
 
   private roundNumbers(): void {
