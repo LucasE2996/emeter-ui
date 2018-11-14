@@ -17,7 +17,6 @@ export class UserService {
      * @param id the user unique identifier.
      */
     public getUserById(id: string): Observable<UserModel> {
-        // return this.http.get<UserModel>(`localhost:8080/user/${id}`);
         return this.http.get<UserModel>(this.MOCKED_URL);
     }
 

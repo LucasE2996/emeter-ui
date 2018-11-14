@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MonitorListItem } from '../../app/models/monitor-list-item.model';
 import { DetailsPage } from '../details/details';
-import { LoadingController } from 'ionic-angular';
 import { MonitorService } from '../../app/services/monitor.service';
 import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 import { UserModel } from '../../app/models/user.model';
+import { LoaderService } from '../../app/common/loader.service';
 
 
 @Component({
@@ -16,19 +16,14 @@ export class MeterListPage implements OnInit {
 
   public items: Array<MonitorListItem>;
 
-  private loader = this.loadingCtrl.create({
-    content: "Please wait...",
-    duration: 3000
-  });
-
   constructor(
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController,
+    public readonly loadingService: LoaderService,
     public readonly monitorService: MonitorService
   ) { }
 
   ngOnInit() {
-    this.loader.present();
+    this.loadingService.showLoader();
     localStorage.removeItem('monitorID');
     const customer: UserModel = JSON.parse(localStorage.getItem('currentUser'));
     this.monitorService.getAllMonitors(customer.id)
@@ -36,7 +31,7 @@ export class MeterListPage implements OnInit {
         monitors ?
         this.items = this.monitorService.mapMonitorDetailtoList(monitors) :
         this.items = []
-      });
+      }).add(() => this.loadingService.dismissLoading());
   }
 
   /**

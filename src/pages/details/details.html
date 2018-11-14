@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding *ngIf="monitorFromServer">
   <h2>{{ monitorFromServer.name }}</h2>
 
   <mwl-gauge
@@ -28,4 +28,8 @@
   <!-- teste purposes -->
   <button ion-button (click)="update()">Atualizar</button>
   
+</ion-content>
+
+<ion-content *ngIf="!monitorFromServer">
+  <h1></h1>
 </ion-content>

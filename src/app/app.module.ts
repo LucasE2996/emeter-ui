@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPage } from '../pages/login/login';
 import { AuthenticationService } from './authentication/authentication.service';
+import { LoaderService } from './common/loader.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AuthenticationService } from './authentication/authentication.service';
     QRScanner,
     AuthenticationService,
     MonitorService,
-    UserService
+    UserService,
+    LoaderService
   ]
 })
 export class AppModule {}

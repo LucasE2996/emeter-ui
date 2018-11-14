@@ -36,7 +36,6 @@ export class LoginPage implements OnDestroy {
             // to keep user logged in between page refreshes
             this.storage.set('currentUser', JSON.stringify(user));
         this.navCtrl.push(TabsPage);
-
         }
     },
       (error: any) => {

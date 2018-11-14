@@ -22,7 +22,6 @@ export class AuthenticationService
     public login(name: string, password: string): Observable<UserModel>
     {
         const authorization: string = btoa(`${name}:${password}`);
-        alert(authorization);
         return this.http.get(this.loginRestEndpint, {
             headers: new HttpHeaders().set('Authorization', `Basic ${authorization}`)
         })
