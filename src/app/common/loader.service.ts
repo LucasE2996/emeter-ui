@@ -4,20 +4,23 @@ import { LoadingController, Loading } from "ionic-angular";
 @Injectable()
 export class LoaderService {
 
+    private loading: Loading;
+
     constructor(public loadingCtrl: LoadingController) { }
 
     /**
      * Shows loader per 10 seconds
      */
     public showLoader(): void {
-        this.createLoader().present();
+        this.loading = this.createLoader();
+        this.loading.present();
     }
 
     /**
      * dismissLoading
      */
-    public dismissLoading() {
-        this.createLoader().dismissAll();
+    public dismissLoading(): void {
+        this.loading ? this.loading.dismissAll() : null;
     }
 
     /**
@@ -26,8 +29,7 @@ export class LoaderService {
     private createLoader(): Loading {
         return this.loadingCtrl.create({
             content: "Please wait...",
-            dismissOnPageChange: true,
-            duration: 10000
+            duration: 3000
         });
     }
 
