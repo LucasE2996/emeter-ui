@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 import { UserModel } from '../../app/models/user.model';
 import { Storage } from '@ionic/storage';
 import { AuthenticationService } from '../../app/authentication/authentication.service';
+import { RegisterPage } from '../register/register';
 
 @Component({
   selector: 'page-login',
@@ -47,6 +48,10 @@ export class LoginPage implements OnDestroy {
         alert.present();
       }
     );
+  }
+
+  public register(): void {
+    this.navCtrl.push(RegisterPage);
   }
 
   public ngOnDestroy(): void {

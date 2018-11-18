@@ -1,0 +1,29 @@
+<ion-content padding>
+
+  <ion-list>
+
+      <ion-item>
+          <ion-label floating>e-mail</ion-label>
+          <ion-input type="text" [(ngModel)]="registerInfoModel.email"></ion-input>
+        </ion-item>
+
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" [(ngModel)]="registerInfoModel.username"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="registerInfoModel.password"></ion-input>
+      </ion-item>
+
+      <!--corrects the out of bound line on password line-->
+      <ion-item id="hidden"></ion-item>
+  </ion-list>
+
+  <div padding>
+      <button ion-button color="primary" block (click)="register()" [disabled]="!validateForm()">Register</button>
+      <button ion-button color="danger" block (click)="exit()">Cancel</button>
+  </div>
+
+</ion-content>

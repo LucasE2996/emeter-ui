@@ -22,7 +22,7 @@ export class MeterListPage implements OnInit {
     public readonly monitorService: MonitorService
   ) { }
 
-  ngOnInit() {
+  public ionViewDidEnter() {
     this.loadingService.showLoader();
     localStorage.removeItem('monitorID');
     const customer: UserModel = JSON.parse(localStorage.getItem('currentUser'));

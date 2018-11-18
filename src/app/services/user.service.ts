@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
-import { UserModel } from "../models/user.model";
+import { UserModel, RegisterInfoModel } from "../models/user.model";
 
 @Injectable()
 
 export class UserService {
 
-    private readonly MOCKED_URL = '/api/user/detail';
+    private readonly URL = '/api/user/detail';
+    private readonly REGISTER_URL = '/api/register';
 
     constructor(private readonly http: HttpClient) {}
 
@@ -17,7 +18,11 @@ export class UserService {
      * @param id the user unique identifier.
      */
     public getUserById(id: string): Observable<UserModel> {
-        return this.http.get<UserModel>(this.MOCKED_URL);
+        return this.http.get<UserModel>(this.URL);
+    }
+
+    public createNewUser(userInfo: RegisterInfoModel): Observable<UserModel> {
+        return this.http.post<UserModel>(this.REGISTER_URL, userInfo);
     }
 
     /**

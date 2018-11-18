@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPage } from '../pages/login/login';
 import { AuthenticationService } from './authentication/authentication.service';
 import { LoaderService } from './common/loader.service';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoaderService } from './common/loader.service';
     MeterListPage,
     TabsPage,
     DetailsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { LoaderService } from './common/loader.service';
     MeterListPage,
     TabsPage,
     DetailsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

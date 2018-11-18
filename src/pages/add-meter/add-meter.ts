@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { MonitorService } from '../../app/services/monitor.service';
+import { MeterListPage } from '../meter-list/meter-list';
+import { LoaderService } from '../../app/common/loader.service';
 
 @Component({
   selector: 'page-add-meter',
@@ -10,12 +13,15 @@ export class AddMeterPage {
 
   constructor(
     public navCtrl: NavController,
-    public qrScanner: QRScanner
+    public qrScanner: QRScanner,
+    public readonly loadingService: LoaderService,
+    public readonly monitorService: MonitorService,
+    private readonly alertCtrl: AlertController
     ) {
       
     }
 
-    public initializeQRCode(): void {
+    /* public initializeQRCode(): void {
       // Optionally request the permission early
       this.qrScanner.prepare()
         .then((status: QRScannerStatus) => {
@@ -40,6 +46,20 @@ export class AddMeterPage {
           }
         })
         .catch((e: any) => console.log('Error is', e));
+    } */
+
+    public initializeQRCode(): void {
+      this.loadingService.showLoader();
+      this.monitorService.createNewMonitor()
+        .subscribe(() => {
+          const alert = this.alertCtrl.create({
+            title: 'SUCCESS',
+            buttons: ['OK']
+          });
+          alert.setSubTitle('New Monitor created !!!');
+          alert.present();
+        })
+        .add(() => () => this.loadingService.dismissLoading());
     }
     
 

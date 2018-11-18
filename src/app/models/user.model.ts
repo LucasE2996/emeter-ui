@@ -11,3 +11,16 @@ export interface UserModel {
     name: string;
     email: string;
 }
+
+/**
+ * The custoemr model for registration.
+ * 
+ * @param username The user username
+ * @param email The user email
+ * @param password The user password
+ */
+export interface RegisterInfoModel {
+    username: string;
+    email: string;
+    password: string;
+  }
