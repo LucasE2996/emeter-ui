@@ -12,7 +12,7 @@ import { LoaderService } from '../../app/common/loader.service';
   selector: 'page-meter-list',
   templateUrl: 'meter-list.html'
 })
-export class MeterListPage implements OnInit {
+export class MeterListPage {
 
   public items: Array<MonitorListItem>;
 

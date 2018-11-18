@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
   selector: 'page-register',
   templateUrl: 'register.html',
 })
-export class RegisterPage implements OnDestroy{
+export class RegisterPage {
 
   private registerInfoModel: RegisterInfoModel = {} as RegisterInfoModel;
 
@@ -25,10 +25,6 @@ export class RegisterPage implements OnDestroy{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
-  }
-
-  public ngOnDestroy(): void {
-    this.navCtrl.popAll();
   }
 
   public register(): void {

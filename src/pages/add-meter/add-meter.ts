@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { MonitorService } from '../../app/services/monitor.service';
-import { MeterListPage } from '../meter-list/meter-list';
 import { LoaderService } from '../../app/common/loader.service';
 
 @Component({

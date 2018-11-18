@@ -21,6 +21,7 @@ import { LoginPage } from '../pages/login/login';
 import { AuthenticationService } from './authentication/authentication.service';
 import { LoaderService } from './common/loader.service';
 import { RegisterPage } from '../pages/register/register';
+import { ProfilePage } from '../pages/profile/profile';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RegisterPage } from '../pages/register/register';
     TabsPage,
     DetailsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { RegisterPage } from '../pages/register/register';
     TabsPage,
     DetailsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

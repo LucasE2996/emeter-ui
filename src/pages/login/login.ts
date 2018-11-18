@@ -11,7 +11,7 @@ import { RegisterPage } from '../register/register';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage implements OnDestroy {
+export class LoginPage {
 
   public username: string;
   public password: string;
@@ -52,10 +52,6 @@ export class LoginPage implements OnDestroy {
 
   public register(): void {
     this.navCtrl.push(RegisterPage);
-  }
-
-  public ngOnDestroy(): void {
-    this.navCtrl.popAll();
   }
 
   public validateForm(): boolean {
