@@ -4,6 +4,7 @@ import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 import { MonitorService } from '../../app/services/monitor.service';
 import { UserModel } from '../../app/models/user.model';
 import { LoaderService } from '../../app/common/loader.service';
+import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -36,9 +37,12 @@ export class DetailsPage implements OnInit {
       .add(() => this.loaginService.dismissLoading());
   }
 
+  public ionViewDidEnter(): void {
+    Observable.interval(10000).takeWhile(() => true).subscribe(() => this.update());
+  }
+
   // Test purposes
   public update(): void {
-    this.loaginService.showLoader();
     const maxValue = this.monitorFromServer.watt.maxValue;
     this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
       .subscribe((monitor: MonitorDetailsModel) =>
@@ -52,7 +56,6 @@ export class DetailsPage implements OnInit {
         if (maxValue < this.monitorFromServer.watt.maxValue) {
           this.navCtrl.setRoot(this.navCtrl.getActive().component);
         }
-        this.loaginService.dismissLoading();
       });
   }
 
