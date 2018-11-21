@@ -1,14 +1,14 @@
 <ion-content padding>
 
-    <img style="width:80%;" src="../../assets/imgs/alpha-1.png" alt="LOGO"/>
+    <img id="logoimg" style="width:80%;" src="../../assets/imgs/alpha-1.png" alt="LOGO"/>
 
     <ion-list no-lines>
         <ion-item>
-          <h2>Username: {{user.username}}</h2>
+          <h2>Username: <span style="color:grey">{{user.username}}</span></h2>
         </ion-item>
       
         <ion-item>
-          <h2>e-mail: {{user.email}}</h2>
+          <h2>e-mail: <span style="color:grey">{{user.email}}</span></h2>
         </ion-item>
 
         <!--corrects the out of bound line on password line-->
