@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 import { MonitorListItem } from '../../app/models/monitor-list-item.model';
 import { DetailsPage } from '../details/details';
 import { MonitorService } from '../../app/services/monitor.service';
 import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 import { UserModel } from '../../app/models/user.model';
 import { LoaderService } from '../../app/common/loader.service';
+import { EfficiencyPage } from '../efficiency/efficiency';
+import { GraphicPage } from '../graphic/graphic';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class MeterListPage {
   constructor(
     public navCtrl: NavController,
     public readonly loadingService: LoaderService,
-    public readonly monitorService: MonitorService
+    public readonly monitorService: MonitorService,
+    public actionSheetCtrl: ActionSheetController
   ) { }
 
   public ionViewDidEnter() {
@@ -41,6 +44,40 @@ export class MeterListPage {
    */
   public itemSelected(item: MonitorListItem): void {
     localStorage.setItem('monitorID', item.id)
-    this.navCtrl.push(DetailsPage);
+    this.presentActionSheet();
+  }
+
+  private presentActionSheet(): void {
+    const actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: 'Details',
+          icon: 'md-document',
+          handler: () => {
+            this.navCtrl.push(DetailsPage);
+          }
+        },{
+          text: 'Efficiency',
+          icon: 'ios-speedometer',
+          handler: () => {
+            this.navCtrl.push(EfficiencyPage);
+          }
+        },{
+          text: 'Graphic',
+          icon: 'md-analytics',
+          handler: () => {
+            this.navCtrl.push(GraphicPage);
+          }
+        },{
+          text: 'Exit',
+          role: 'cancel',
+          icon: 'ios-close-circle',
+          handler: () => {
+            console.log('exit');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

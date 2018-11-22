@@ -7,22 +7,36 @@
 </ion-header>
 
 
-<ion-content padding *ngIf="monitorFromServer">
+<ion-content h5adding *ngIf="monitorFromServer">
+
   <h2>{{ monitorFromServer.name }}</h2>
 
-  <mwl-gauge
-    [max]="monitorFromServer.watt.maxValue"
-    [dialStartAngle]="180"
-    [dialEndAngle]="0"
-    [value]="monitorFromServer.watt.value"
-    [animated]="true"
-    [animationDuration]="1">
-  </mwl-gauge>
-
-  <div class="text-info">
-    <h5>Day Avarage: {{ monitorFromServer.report.dayAverage }}</h5>
-    <h5>Week Avarage: {{ monitorFromServer.report.weekAverage }}</h5>
-    <h5>Month Avarage: {{ monitorFromServer.report.monthAverage }}</h5>
+  <div class="text-info" padding>
+    <div class="box">
+      <h4>Live Voltage:</h4>
+      <h5>{{ monitorFromServer.watt.voltage }} v</h5>
+    </div>
+    <div class="box">
+      <h4>Live Current:</h4>
+      <h5>{{ monitorFromServer.watt.current }} A</h5>
+    </div>
+    <div class="box">
+      <h4>Live Consumption:</h4>
+      <h5>{{ monitorFromServer.watt.watts }} w</h5>
+    </div>
+    <div class="box">
+      <h4>Day Avarage:</h4>
+      <h5>{{ monitorFromServer.report.dayAverage }} w</h5>
+    </div>
+    <div class="box">
+      <h4>Week Avarage:</h4>
+      <h5>{{ monitorFromServer.report.weekAverage }} w</h5>
+    </div>
+    <div class="box">
+      <h4>Month Avarage:</h4>
+      <h5>{{ monitorFromServer.report.monthAverage }} w</h5>
+    </div>
+  
   </div>
   
 </ion-content>

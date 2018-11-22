@@ -10,6 +10,8 @@ import { LoaderService } from '../../app/common/loader.service';
 })
 export class AddMeterPage {
 
+  public nominalValue: string;
+
   constructor(
     public navCtrl: NavController,
     public qrScanner: QRScanner,
@@ -47,9 +49,19 @@ export class AddMeterPage {
         .catch((e: any) => console.log('Error is', e));
     } */
 
-    public initializeQRCode(): void {
+
+    showAlert() {
+      const alert = this.alertCtrl.create({
+        title: 'Info!',
+        subTitle: 'A potência nominal é ...',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+
+    public addMonitor(): void {
       this.loadingService.showLoader();
-      this.monitorService.createNewMonitor()
+      this.monitorService.createNewMonitor(this.nominalValue)
         .subscribe(() => {
           const alert = this.alertCtrl.create({
             title: 'SUCCESS',
@@ -61,5 +73,11 @@ export class AddMeterPage {
         .add(() => () => this.loadingService.dismissLoading());
     }
     
+    public validadeInput(): boolean {
+      console.log(this.nominalValue);
+      return this.nominalValue !== null &&
+        this.nominalValue !== undefined &&
+        this.nominalValue !== '';
+    }
 
 }

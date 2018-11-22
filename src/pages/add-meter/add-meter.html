@@ -1,4 +1,18 @@
 <ion-content padding>
-  <img style="width:80%;" src="../../assets/imgs/symbol-B&W.png" alt="LOGO"/>
-  <button ion-button color="secondary" (click)="initializeQRCode()">Add new monitor</button>
+  <img style="width:60%;" src="../../assets/imgs/symbol-B&W.png" alt="LOGO"/>
+
+  <ion-list>
+      <ion-item>
+        <ion-label floating>Potencia nominal</ion-label>
+        <ion-input type="number" [(ngModel)]="nominalValue"></ion-input>
+      </ion-item>
+      <!--corrects the out of bound line on password line-->
+      <ion-item id="hidden"></ion-item>
+  </ion-list>
+  <button ion-button color="secondary" (click)="addMonitor()" [disabled]="!validadeInput()">Novo Medidor</button>
+
+  <ion-fab right bottom>
+      <button ion-fab color="light" (click)="showAlert()"><ion-icon name="md-help"></ion-icon></button>
+  </ion-fab>
+
 </ion-content>

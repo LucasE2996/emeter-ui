@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
-import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
+import { NavController, NavParams } from 'ionic-angular';
 import { MonitorService } from '../../app/services/monitor.service';
-import { UserModel } from '../../app/models/user.model';
 import { LoaderService } from '../../app/common/loader.service';
+import { UserModel } from '../../app/models/user.model';
+import { MonitorDetailsModel } from '../../app/models/monitor-details.model';
 import { Observable } from 'rxjs';
 
-@IonicPage()
 @Component({
-  selector: 'page-details',
-  templateUrl: 'details.html',
+  selector: 'page-efficiency',
+  templateUrl: 'efficiency.html',
 })
-export class DetailsPage implements OnInit {
+export class EfficiencyPage implements OnInit {
 
   public monitorFromServer: MonitorDetailsModel;
+  public status: string = "CONFORME";
+
   private user: UserModel;
   private monitorId: string;
 
@@ -22,9 +23,10 @@ export class DetailsPage implements OnInit {
     public navParams: NavParams,
     public readonly monitorService: MonitorService,
     public readonly loaginService: LoaderService
-  ) { }
+    ) 
+    { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loaginService.showLoader();
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.monitorId = localStorage.getItem('monitorID');
@@ -38,21 +40,59 @@ export class DetailsPage implements OnInit {
   }
 
   public ionViewDidEnter(): void {
-    Observable.interval(10000).takeWhile(() => true).subscribe(() => this.update());
+    Observable.interval(10000).takeWhile(() => true).subscribe(() => {
+      this.update();
+      this.updateStatus();
+    });
   }
 
   public update(): void {
+    const maxValue = this.monitorFromServer.watt.maxValue;
     this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
       .subscribe((monitor: MonitorDetailsModel) =>
         monitor ?
         this.monitorFromServer = monitor :
         this.monitorFromServer = {} as MonitorDetailsModel
-      ).add(() => this.roundNumbers());
+      ).add(() => {
+        this.roundNumbers();
+        this.updateStatus();
+        if (maxValue < this.monitorFromServer.watt.watts) {
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        }
+      });
   }
 
   private roundNumbers(): void {
     this.monitorFromServer.report.dayAverage = Math.round(this.monitorFromServer.report.dayAverage * 100) / 100;
     this.monitorFromServer.report.weekAverage = Math.round(this.monitorFromServer.report.weekAverage * 100) / 100;
     this.monitorFromServer.report.monthAverage = Math.round(this.monitorFromServer.report.monthAverage * 100) / 100;
+  }
+
+  private updateStatus(): void {
+    if (-10 <= this.monitorFromServer.diversion  && this.monitorFromServer.diversion <= 5 ) {
+      this.status = 'CONFORME';
+    } else {
+      this.status = 'DESCONFORME';
+    }
+    this.changeWattColor();
+    this.changeDiversionColor();
+  }
+
+  changeWattColor() {
+    const watt: number = this.monitorFromServer.watt.watts;
+    const maxValue: number = this.monitorFromServer.watt.maxValue;
+    return (() => {
+      if (watt > maxValue * 0.4 && watt < maxValue * 0.8) {
+        return 'yellow';
+      } else if (watt < maxValue * 0.4) {
+        return 'red';
+      } else {
+        return 'green';
+      }
+    });
+  }
+
+  changeDiversionColor() {
+    return (() => this.status === 'CONFORME' ? 'green' : 'red');
   }
 }

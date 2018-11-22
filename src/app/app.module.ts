@@ -22,6 +22,8 @@ import { AuthenticationService } from './authentication/authentication.service';
 import { LoaderService } from './common/loader.service';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
+import { GraphicPage } from '../pages/graphic/graphic';
+import { EfficiencyPage } from '../pages/efficiency/efficiency';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ProfilePage } from '../pages/profile/profile';
     DetailsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    EfficiencyPage,
+    GraphicPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import { ProfilePage } from '../pages/profile/profile';
     DetailsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    EfficiencyPage,
+    GraphicPage
   ],
   providers: [
     StatusBar,

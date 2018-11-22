@@ -13,12 +13,16 @@ export interface MonitorDetailsModel {
     client_id: number;
     channel_id: number;
     name: string;
+    nominalPower: number;
+    diversion: number;
     watt: Watt;
     report: Report;
 }
 
 export interface Watt {
-    value: number;
+    watts: number;
+    voltage: number;
+    current: number;
     maxValue: number;
     minValue: number;
     date: string;

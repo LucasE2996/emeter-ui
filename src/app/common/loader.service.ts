@@ -20,7 +20,7 @@ export class LoaderService {
      * dismissLoading
      */
     public dismissLoading(): void {
-        this.loading ? this.loading.dismissAll() : null;
+        this.loading ?  this.loading.dismissAll() : null;
     }
 
     /**

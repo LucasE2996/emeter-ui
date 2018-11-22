@@ -1,11 +1,18 @@
 page-add-meter {
+    .scroll-content {
+        padding-bottom: 0 !important;
+        overflow: hidden;
+      }
     text-align: center;
     img {
         font-size: 80vw;
         opacity: 0.5;
-        margin-bottom: 20vh;
+        margin-bottom: 20px;
     }
     button {
         width: 70vw;
+    }
+    #hidden {
+        opacity: 0;
     }
 }

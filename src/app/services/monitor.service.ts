@@ -30,9 +30,9 @@ export class MonitorService {
     /**
      * Creates a new monitor with default configuration from server.
      */
-    public createNewMonitor(): Observable<Object> {
+    public createNewMonitor(nominalValue: string): Observable<Object> {
         const customer: UserModel = JSON.parse(localStorage.getItem('currentUser'));
-        return this.http.post(`/api//user/${customer.id}/new-meter`, {});
+        return this.http.post(`/api//user/${customer.id}/new-meter`, {nominalValue});
     }
 
     public mapMonitorDetailtoList(monitors: Array<MonitorDetailsModel>): Array<MonitorListItem> {
