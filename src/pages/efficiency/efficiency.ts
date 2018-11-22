@@ -13,7 +13,9 @@ import { Observable } from 'rxjs';
 export class EfficiencyPage implements OnInit {
 
   public monitorFromServer: MonitorDetailsModel;
-  public status: string = "CONFORME";
+  public status: string;
+  public percentageValue: number;
+  public signal: string = '';
 
   private user: UserModel;
   private monitorId: string;
@@ -32,9 +34,13 @@ export class EfficiencyPage implements OnInit {
     this.monitorId = localStorage.getItem('monitorID');
     this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
       .subscribe((monitor: MonitorDetailsModel) =>
+      { 
         monitor ?
         this.monitorFromServer = monitor :
-        this.monitorFromServer = {} as MonitorDetailsModel
+        this.monitorFromServer = {} as MonitorDetailsModel;
+        this.updateSignal();
+        this.updateStatus();
+      }
       ).add(() => this.roundNumbers())
       .add(() => this.loaginService.dismissLoading());
   }
@@ -56,6 +62,8 @@ export class EfficiencyPage implements OnInit {
       ).add(() => {
         this.roundNumbers();
         this.updateStatus();
+        this.updateSignal();
+        console.log(this.percentageValue);
         if (maxValue < this.monitorFromServer.watt.watts) {
           this.navCtrl.setRoot(this.navCtrl.getActive().component);
         }
@@ -82,9 +90,9 @@ export class EfficiencyPage implements OnInit {
     const watt: number = this.monitorFromServer.watt.watts;
     const maxValue: number = this.monitorFromServer.watt.maxValue;
     return (() => {
-      if (watt > maxValue * 0.4 && watt < maxValue * 0.8) {
+      if (watt > (maxValue * 0.4) && watt < (maxValue * 0.8)) {
         return 'yellow';
-      } else if (watt < maxValue * 0.4) {
+      } else if (watt < (maxValue * 0.4)) {
         return 'red';
       } else {
         return 'green';
@@ -94,5 +102,12 @@ export class EfficiencyPage implements OnInit {
 
   changeDiversionColor() {
     return (() => this.status === 'CONFORME' ? 'green' : 'red');
+  }
+
+  private updateSignal(): void {
+    if (this.monitorFromServer.diversion < 0) {
+      this.percentageValue = this.monitorFromServer.diversion * -1;
+      this.signal = '-';
+    }
   }
 }

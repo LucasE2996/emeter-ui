@@ -30,13 +30,13 @@
   </div>
   
   <div class="section">
-      <h4>Desvio (%)</h4>
+      <h4>Desvio ({{ signal }} %)</h4>
 
       <mwl-gauge
         [max]="100"
         [dialStartAngle]="180"
         [dialEndAngle]="0"
-        [value]="monitorFromServer.diversion"
+        [value]="percentageValue"
         [animated]="true"
         [animationDuration]="1"
         [color]=changeDiversionColor()>
