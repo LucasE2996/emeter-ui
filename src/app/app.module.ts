@@ -24,6 +24,7 @@ import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
 import { GraphicPage } from '../pages/graphic/graphic';
 import { EfficiencyPage } from '../pages/efficiency/efficiency';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EfficiencyPage } from '../pages/efficiency/efficiency';
     GaugeModule.forRoot(),
     IonicStorageModule.forRoot(),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

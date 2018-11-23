@@ -12,7 +12,35 @@
 
 </ion-header>
 
+<ion-content padding *ngIf="monitorFromServer">
 
-<ion-content padding>
+  <div id="spacing"></div>
+
+  <h4>Historico de valores</h4>
+
+  <ion-list>
+      <div style="display: block;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [colors]="barChartColors"
+                [chartType]="barChartType"></canvas>
+      </div>
+  </ion-list>
+
+  <!-- <ion-list>
+    <div style="display: block;">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColors"
+              [chartType]="barChartType"></canvas>
+    </div>
+</ion-list> -->
+
 
 </ion-content>

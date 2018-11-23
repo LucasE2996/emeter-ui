@@ -26,6 +26,9 @@ export interface Watt {
     maxValue: number;
     minValue: number;
     date: string;
+    month: string;
+    day: string;
+    hour: string;
 }
 
 export interface Report {

@@ -16,7 +16,17 @@ page-efficiency {
     h4 {
         margin: 0;
     }
-
+    #statusSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        background-color: red;
+    }
+    .conforme {
+        background-color: green;
+    }
     mwl-gauge > .gauge > .value-text {
         fill: rgb(61, 61, 61);
         font-family: sans-serif;

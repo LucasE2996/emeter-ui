@@ -38,6 +38,7 @@ export class EfficiencyPage implements OnInit {
         monitor ?
         this.monitorFromServer = monitor :
         this.monitorFromServer = {} as MonitorDetailsModel;
+        this.percentageValue = monitor.diversion;
         this.updateSignal();
         this.updateStatus();
       }
@@ -56,9 +57,12 @@ export class EfficiencyPage implements OnInit {
     const maxValue = this.monitorFromServer.watt.maxValue;
     this.monitorService.getMonitorDetail(this.user.id, this.monitorId)
       .subscribe((monitor: MonitorDetailsModel) =>
+      {
         monitor ?
         this.monitorFromServer = monitor :
-        this.monitorFromServer = {} as MonitorDetailsModel
+        this.monitorFromServer = {} as MonitorDetailsModel;
+        this.percentageValue = monitor.diversion;
+      }
       ).add(() => {
         this.roundNumbers();
         this.updateStatus();

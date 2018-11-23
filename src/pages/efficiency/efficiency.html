@@ -43,8 +43,8 @@
       </mwl-gauge>
   </div>
 
-  <div class="section" id="statusSection">
-      <h4>{{  status }}</h4>
+  <div [className]="status === CONFORME ? conforme : desconforme" id="statusSection">
+      <h4>{{ status }}</h4>
   </div>
 
 
