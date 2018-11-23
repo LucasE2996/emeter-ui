@@ -41,10 +41,10 @@ export class LoginPage {
     },
       (error: any) => {
         const alert = this.alertCtrl.create({
-          title: 'Login Failed!',
+          title: 'Falha no Login!',
           buttons: ['OK']
         });
-        alert.setSubTitle(JSON.stringify(error));
+        alert.setSubTitle(`usuário ou senha errado(s)`);
         alert.present();
       }
     );

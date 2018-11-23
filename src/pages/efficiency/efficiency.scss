@@ -22,10 +22,11 @@ page-efficiency {
         align-items: center;
         justify-content: center;
         height: 60px;
-        background-color: red;
+        background-color: #e84545;
+        border-radius: 20px;
     }
     .conforme {
-        background-color: green !important;
+        background-color: #1ECD97 !important;
     }
     mwl-gauge > .gauge > .value-text {
         fill: rgb(61, 61, 61);

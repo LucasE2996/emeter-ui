@@ -30,20 +30,22 @@ export class RegisterPage {
   public register(): void {
     this.userService.createNewUser(this.registerInfoModel).subscribe((user: UserModel) =>
     {
-        // login successful if there's a user in the response
         if (user) {
-            // store user details and basic auth credentials in local storage 
-            // to keep user logged in between page refreshes
-            this.storage.set('currentUser', JSON.stringify(user));
-        this.navCtrl.push(TabsPage);
+          const alert = this.alertCtrl.create({
+            title: 'Usuário criado com sucesso!',
+            buttons: ['OK']
+          });
+          alert.setSubTitle(`Usuário ${user.username} criado com sucesso!`);
+          alert.present();
+          this.exit();
         }
     },
       (error: any) => {
         const alert = this.alertCtrl.create({
-          title: 'Login Failed!',
+          title: 'Failed!',
           buttons: ['OK']
         });
-        alert.setSubTitle(JSON.stringify(error));
+        alert.setSubTitle(`Falha ao criar novo usuário\nError:\n${error}`);
         alert.present();
       }
     );

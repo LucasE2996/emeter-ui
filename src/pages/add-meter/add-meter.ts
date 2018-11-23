@@ -53,7 +53,7 @@ export class AddMeterPage {
     showAlert() {
       const alert = this.alertCtrl.create({
         title: 'Info!',
-        subTitle: 'A potência nominal é ...',
+        subTitle: 'Potência nominal é a potência de um componente ou equipamento em que o fabricante afirma se obedecida as condições específica de tensão ou corrente.',
         buttons: ['OK']
       });
       alert.present();
@@ -64,10 +64,10 @@ export class AddMeterPage {
       this.monitorService.createNewMonitor(this.nominalValue)
         .subscribe(() => {
           const alert = this.alertCtrl.create({
-            title: 'SUCCESS',
+            title: 'Sucesso!',
             buttons: ['OK']
           });
-          alert.setSubTitle('New Monitor created !!!');
+          alert.setSubTitle('Novo medidor foi criado.');
           alert.present();
         })
         .add(() => () => this.loadingService.dismissLoading());

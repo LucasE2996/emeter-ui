@@ -97,15 +97,15 @@ export class EfficiencyPage implements OnInit {
   changeWattColor() {
     return (() => {
       if (!this.isConforme()) {
-        return 'red';
+        return '#e84545';
       } else {
-        return 'green';
+        return '#1ECD97';
       }
     });
   }
 
   changeDiversionColor() {
-    return (() => this.status === 'CONFORME' ? 'green' : 'red');
+    return (() => this.status === 'CONFORME' ? '#1ECD97' : '#e84545');
   }
 
   private isConforme(): boolean {

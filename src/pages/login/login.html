@@ -4,12 +4,12 @@
 
     <ion-list>
         <ion-item>
-          <ion-label floating>Username</ion-label>
+          <ion-label floating>Usuário</ion-label>
           <ion-input type="text" [(ngModel)]="username"></ion-input>
         </ion-item>
       
         <ion-item>
-          <ion-label floating>Password</ion-label>
+          <ion-label floating>Senha</ion-label>
           <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
 
@@ -18,8 +18,8 @@
     </ion-list>
 
     <div padding>
-        <button ion-button color="primary" block (click)="login()" [disabled]="!validateForm()">Sign In</button>
-        <button ion-button color="secondary" block (click)="register()" id="registerbtn">Register</button>
+        <button ion-button color="primary" block (click)="login()" [disabled]="!validateForm()">Entrar</button>
+        <button ion-button color="secondary" block (click)="register()" id="registerbtn">Cadastre-se</button>
     </div>
 
 </ion-content>
