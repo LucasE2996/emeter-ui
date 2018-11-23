@@ -16,12 +16,13 @@
 <ion-content padding *ngIf="this.monitorFromServer">
 
   <div class="section">
-      <h4>Potência (Watts)</h4>
+      <h4>Potência</h4>
 
       <mwl-gauge
         [max]="monitorFromServer.watt.maxValue"
         [dialStartAngle]="180"
         [dialEndAngle]="0"
+        [label]="wattsLabel"
         [value]="monitorFromServer.watt.watts"
         [animated]="true"
         [animationDuration]="1"
@@ -30,12 +31,13 @@
   </div>
   
   <div class="section">
-      <h4>Desvio ({{ signal }} %)</h4>
+      <h4>Desvio</h4>
 
       <mwl-gauge
         [max]="100"
         [dialStartAngle]="180"
         [dialEndAngle]="0"
+        [label]="percentageValueLabel"
         [value]="percentageValue"
         [animated]="true"
         [animationDuration]="1"
@@ -43,7 +45,7 @@
       </mwl-gauge>
   </div>
 
-  <div [className]="status === CONFORME ? conforme : desconforme" id="statusSection">
+  <div [class.conforme]="status === 'CONFORME'" id="statusSection">
       <h4>{{ status }}</h4>
   </div>
 

@@ -14,8 +14,9 @@ export class EfficiencyPage implements OnInit {
 
   public monitorFromServer: MonitorDetailsModel;
   public status: string;
+  public percentageValueLabel: (value: number) => string;
+  public wattsLabel: (value: number) => string;
   public percentageValue: number;
-  public signal: string = '';
 
   private user: UserModel;
   private monitorId: string;
@@ -26,7 +27,10 @@ export class EfficiencyPage implements OnInit {
     public readonly monitorService: MonitorService,
     public readonly loaginService: LoaderService
     ) 
-    { }
+    { 
+      this.wattsLabel = ((value: number) => `${Math.round(value)} w`);
+      this.percentageValueLabel = ((value: number) => `${Math.round(value)} %`);
+    }
 
   public ngOnInit(): void {
     this.loaginService.showLoader();
@@ -38,11 +42,12 @@ export class EfficiencyPage implements OnInit {
         monitor ?
         this.monitorFromServer = monitor :
         this.monitorFromServer = {} as MonitorDetailsModel;
-        this.percentageValue = monitor.diversion;
-        this.updateSignal();
+        this.setPercentageValue(monitor.diversion);
         this.updateStatus();
       }
-      ).add(() => this.roundNumbers())
+      ).add(() => {
+        this.roundNumbers();
+      })
       .add(() => this.loaginService.dismissLoading());
   }
 
@@ -61,13 +66,11 @@ export class EfficiencyPage implements OnInit {
         monitor ?
         this.monitorFromServer = monitor :
         this.monitorFromServer = {} as MonitorDetailsModel;
-        this.percentageValue = monitor.diversion;
+        this.setPercentageValue(monitor.diversion);
       }
       ).add(() => {
         this.roundNumbers();
         this.updateStatus();
-        this.updateSignal();
-        console.log(this.percentageValue);
         if (maxValue < this.monitorFromServer.watt.watts) {
           this.navCtrl.setRoot(this.navCtrl.getActive().component);
         }
@@ -78,10 +81,11 @@ export class EfficiencyPage implements OnInit {
     this.monitorFromServer.report.dayAverage = Math.round(this.monitorFromServer.report.dayAverage * 100) / 100;
     this.monitorFromServer.report.weekAverage = Math.round(this.monitorFromServer.report.weekAverage * 100) / 100;
     this.monitorFromServer.report.monthAverage = Math.round(this.monitorFromServer.report.monthAverage * 100) / 100;
+    this.monitorFromServer.watt.watts = Math.round(this.monitorFromServer.watt.watts * 100) / 100;
   }
 
   private updateStatus(): void {
-    if (-10 <= this.monitorFromServer.diversion  && this.monitorFromServer.diversion <= 5 ) {
+    if (this.isConforme()) {
       this.status = 'CONFORME';
     } else {
       this.status = 'DESCONFORME';
@@ -91,12 +95,8 @@ export class EfficiencyPage implements OnInit {
   }
 
   changeWattColor() {
-    const watt: number = this.monitorFromServer.watt.watts;
-    const maxValue: number = this.monitorFromServer.watt.maxValue;
     return (() => {
-      if (watt > (maxValue * 0.4) && watt < (maxValue * 0.8)) {
-        return 'yellow';
-      } else if (watt < (maxValue * 0.4)) {
+      if (!this.isConforme()) {
         return 'red';
       } else {
         return 'green';
@@ -108,10 +108,15 @@ export class EfficiencyPage implements OnInit {
     return (() => this.status === 'CONFORME' ? 'green' : 'red');
   }
 
-  private updateSignal(): void {
-    if (this.monitorFromServer.diversion < 0) {
-      this.percentageValue = this.monitorFromServer.diversion * -1;
-      this.signal = '-';
+  private isConforme(): boolean {
+    return -10 <= this.monitorFromServer.diversion && this.monitorFromServer.diversion <= 5
+  }
+
+  private setPercentageValue(value: number): void {
+    if(value < 0) {
+      this.percentageValue = value * -1;
+    } else {
+      this.percentageValue = value;
     }
   }
 }

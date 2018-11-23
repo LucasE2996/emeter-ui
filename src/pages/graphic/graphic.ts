@@ -33,7 +33,7 @@ export class GraphicPage {
     barChartLabels = [];
     barChartType:string = 'line';
     barChartLegend:boolean = true;
-    barCharData:any;
+    barChartData: Array<any>;
     wattsValues: Array<number> = [0];
     voltageValues: Array<number> = [0];
     currentValues: Array<number> = [0];
@@ -95,7 +95,7 @@ export class GraphicPage {
     }
 
   ionViewDidLoad() {
-    // Observable.interval(10000).takeWhile(() => true).subscribe(() => this.update());
+    Observable.interval(10000).takeWhile(() => true).subscribe(() => this.update());
   }
 
   public update(): void {
@@ -106,24 +106,22 @@ export class GraphicPage {
         this.monitorFromServer = {} as MonitorDetailsModel
       ).add(() => {
           this.roundNumbers();
-          // this.calcBar();
+          this.calcBar();
         });
     }
   
   private calcBar(): void {
-        this.wattsValues.push(this.monitorFromServer.watt.watts);
-        this.voltageValues.push(this.monitorFromServer.watt.voltage);
-        this.currentValues.push(this.monitorFromServer.watt.current);
+        this.updateGraphicValues();
 
-        this.barChartLabels = ['', '', '', '', '', '', '', '', '', '']; 
+        this.barChartLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; 
 
-        this.barCharData = [
+        this.barChartData = [
             {   
-                data: this.currentValues, label: 'Corrente'
+                data: this.currentValues, label: 'Corrente(A)'
             },{
-                data: this.voltageValues, label: 'Tensão'
+                data: this.voltageValues, label: 'Tensão(v)'
             },{
-                data: this.wattsValues, label: 'Potência'
+                data: this.wattsValues, label: 'Potência(w)'
             }
         ];
   }
@@ -137,6 +135,28 @@ export class GraphicPage {
     this.monitorFromServer.report.dayAverage = Math.round(this.monitorFromServer.report.dayAverage * 100) / 100;
     this.monitorFromServer.report.weekAverage = Math.round(this.monitorFromServer.report.weekAverage * 100) / 100;
     this.monitorFromServer.report.monthAverage = Math.round(this.monitorFromServer.report.monthAverage * 100) / 100;
+  }
+
+  private updateGraphicValues(): void {
+    this.wattsValues.length < 10
+        ? this.wattsValues.push(this.monitorFromServer.watt.watts) 
+        : this.popAndPush(this.wattsValues, this.monitorFromServer.watt.watts);
+
+    this.voltageValues.length < 10
+        ? this.voltageValues.push(this.monitorFromServer.watt.voltage) 
+        : this.popAndPush(this.voltageValues, this.monitorFromServer.watt.voltage);
+    
+    this.currentValues.length < 10
+        ? this.currentValues.push(this.monitorFromServer.watt.current) 
+        : this.popAndPush(this.currentValues, this.monitorFromServer.watt.current);
+  }
+
+  private popAndPush(array: Array<number>, value: number): void {
+    for (let position = 0; position < array.length; position++) {
+        array[position] = array[position +1];
+    }
+    array.pop();
+    array.push(value);
   }
 
 }
