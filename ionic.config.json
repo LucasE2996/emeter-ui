@@ -6,7 +6,7 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://localhost:8080"
+      "proxyUrl": "https://emeter.herokuapp.com"
     }
   ],
   "type": "ionic-angular"

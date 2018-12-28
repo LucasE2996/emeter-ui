@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { QRScanner } from '@ionic-native/qr-scanner';
 import { MonitorService } from '../../app/services/monitor.service';
 import { LoaderService } from '../../app/common/loader.service';
 
@@ -69,8 +69,8 @@ export class AddMeterPage {
           });
           alert.setSubTitle('Novo medidor foi criado.');
           alert.present();
+          this.loadingService.dismissLoading();
         })
-        .add(() => () => this.loadingService.dismissLoading());
     }
     
     public validadeInput(): boolean {
