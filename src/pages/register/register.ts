@@ -1,10 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegisterInfoModel, UserModel } from '../../app/models/user.model';
 import { UserService } from '../../app/services/user.service';
-import { TabsPage } from '../tabs/tabs';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-register',
@@ -18,7 +16,6 @@ export class RegisterPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public userService: UserService,
-    private storage: Storage,
     private readonly alertCtrl: AlertController,
     )
   { }

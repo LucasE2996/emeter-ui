@@ -7,8 +7,6 @@ import { UserModel } from '../models/user.model';
 export class AuthenticationService
 {
 
-    private readonly loginRestEndpint = '/api/user/detail';
-
     constructor(
         private http: HttpClient
     )
@@ -19,12 +17,13 @@ export class AuthenticationService
      *
      * @param user The user model
      */
-    public login(name: string, password: string): Observable<UserModel>
+    public login(name: string): Observable<UserModel>
     {
-        const authorization: string = btoa(`${name}:${password}`);
-        return this.http.get(this.loginRestEndpint, {
-            headers: new HttpHeaders().set('Authorization', `Basic ${authorization}`)
-        })
+        return this.http.get(`/api/user/detail`, {
+            params: {
+                userName: name
+            }
+    })
             .map((userLogged: UserModel) =>
             {
                 if (userLogged)

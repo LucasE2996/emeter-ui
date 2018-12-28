@@ -29,7 +29,7 @@ export class LoginPage {
   }
 
   public login(): void {
-    this.authService.login(this.username, this.password).subscribe((user: UserModel) =>
+    this.authService.login(this.username).subscribe((user: UserModel) =>
     {
         // login successful if there's a user in the response
         if (user) {
