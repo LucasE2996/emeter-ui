@@ -7,8 +7,8 @@ import { UserModel, RegisterInfoModel } from "../models/user.model";
 
 export class UserService {
 
-    private readonly URL = '/api/user/detail';
-    private readonly REGISTER_URL = '/api/register';
+    private readonly URL = 'https://emeter.herokuapp.com/user/detail';
+    private readonly REGISTER_URL = 'https://emeter.herokuapp.com/register';
 
     constructor(private readonly http: HttpClient) {}
 

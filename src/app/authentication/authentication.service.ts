@@ -19,7 +19,7 @@ export class AuthenticationService
      */
     public login(name: string): Observable<UserModel>
     {
-        return this.http.get(`/api/user/detail`, {
+        return this.http.get(`https://emeter.herokuapp.com/user/detail`, {
             params: {
                 userName: name
             }

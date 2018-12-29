@@ -17,14 +17,14 @@ export class MonitorService {
      * @param id the monitor unique identifier.
      */
     public getMonitorDetail(userId: string, id: string): Observable<MonitorDetailsModel> {
-        return this.http.get<MonitorDetailsModel>(`/api/monitor/${userId}/monitors/${id}/detail`);
+        return this.http.get<MonitorDetailsModel>(`https://emeter.herokuapp.com/monitor/${userId}/monitors/${id}/detail`);
     }
 
     /**
      * Return all monitors for List page.
      */
     public getAllMonitors(userId: string): Observable<Array<MonitorDetailsModel>> {
-        return this.http.get<Array<MonitorDetailsModel>>(`/api/monitor/${userId}/monitors`);
+        return this.http.get<Array<MonitorDetailsModel>>(`https://emeter.herokuapp.com/monitor/${userId}/monitors`);
     }
 
     /**
@@ -32,7 +32,7 @@ export class MonitorService {
      */
     public createNewMonitor(nominalValue: string): Observable<Object> {
         const customer: UserModel = JSON.parse(localStorage.getItem('currentUser'));
-        return this.http.post(`/api//monitor/${customer.id}/new-monitor`, {nominalValue});
+        return this.http.post(`https://emeter.herokuapp.com//monitor/${customer.id}/new-monitor`, {nominalValue});
     }
 
     public mapMonitorDetailtoList(monitors: Array<MonitorDetailsModel>): Array<MonitorListItem> {
